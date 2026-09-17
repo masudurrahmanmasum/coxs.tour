@@ -64,12 +64,7 @@ body {
     /* IMPORTANT:
        Body and website use the same background.
        This removes the outside/second canvas. */
-    background:
-        linear-gradient(
-            180deg,
-            #031522 0%,
-            #020f19 100%
-        );
+    background: #041927;
 }
 
 a {
