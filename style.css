@@ -1539,7 +1539,7 @@ img {
 
             color: #ffffff;
 
-            font-size: 20px;
+            font-size: 2৩px;
 
             font-weight: 600;
 
@@ -1557,9 +1557,9 @@ img {
 
             color: #63d8d4;
 
-            font-size: 14px;
+            font-size: 17px;
 
-            font-weight: 600;
+            font-weight: 500;
 
             margin-bottom: 18px;
 
@@ -1586,9 +1586,9 @@ img {
 
         .social a {
 
-            width: 30px;
+            width: 50px;
 
-            height: 30px;
+            height: 50px;
 
             display: flex;
 
@@ -1606,7 +1606,7 @@ img {
                 1px solid
                 rgba(150, 230, 225, .28);
 
-            font-size: 12px;
+            font-size: 25px;
 
             transition:
                 all .3s ease;
