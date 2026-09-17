@@ -655,6 +655,7 @@ img {
     justify-content: center;
 
     overflow: hidden;
+    height: 95vh;
 }
 
 .hero-background {
@@ -1294,6 +1295,71 @@ img {
            CARD
         ===================================================== */
 
+        /* =====================================================
+           CARD SCROLL REVEAL WRAPPER
+           IMPORTANT: animation happens ONLY after scrolling
+        ===================================================== */
+
+        .card-scroll {
+
+            opacity: 0;
+
+            transform:
+                translateY(100px)
+                scale(.90);
+
+            transition:
+                opacity .8s ease,
+                transform .8s cubic-bezier(.17,.67,.35,1.2);
+
+            will-change: opacity, transform;
+
+        }
+
+
+        .card-scroll.show {
+
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1);
+
+        }
+
+
+        .card-scroll:nth-child(1) {
+            transition-delay: .10s;
+        }
+
+
+        .card-scroll:nth-child(2) {
+            transition-delay: .25s;
+        }
+
+
+        .card-scroll:nth-child(3) {
+            transition-delay: .40s;
+        }
+
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .card-scroll {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+
+        }
+
+
+        /* =====================================================
+           CARD
+           The card itself is kept free from scroll animation
+           because JavaScript uses transform for 3D tilt.
+        ===================================================== */
+
         .card {
 
             position: relative;
@@ -1313,7 +1379,6 @@ img {
                 1px solid
                 rgba(83, 211, 211, .24);
 
-
             box-shadow:
 
                 0 20px 40px
@@ -1326,75 +1391,12 @@ img {
 
             -webkit-backdrop-filter: blur(10px);
 
-            opacity: 0;
-
-            transform:
-                translateY(80px)
-                scale(.88);
-
-            animation:
-                cardAppear
-                1s
-                cubic-bezier(.17,.67,.35,1.2)
-                forwards;
-
             transition:
-
                 transform .45s ease,
-
                 border-color .45s ease,
-
                 box-shadow .45s ease;
 
             transform-style: preserve-3d;
-
-        }
-
-
-        .card:nth-child(1) {
-
-            animation-delay: .2s;
-
-        }
-
-
-        .card:nth-child(2) {
-
-            animation-delay: .45s;
-
-        }
-
-
-        .card:nth-child(3) {
-
-            animation-delay: .7s;
-
-        }
-
-
-        @keyframes cardAppear {
-
-            0% {
-
-                opacity: 0;
-
-                transform:
-                    translateY(90px)
-                    scale(.85)
-                    rotateX(12deg);
-
-            }
-
-            100% {
-
-                opacity: 1;
-
-                transform:
-                    translateY(0)
-                    scale(1)
-                    rotateX(0);
-
-            }
 
         }
 

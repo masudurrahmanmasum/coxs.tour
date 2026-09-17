@@ -2,26 +2,14 @@
    MOBILE MENU
 ========================================================= */
 
-const menuToggle =
-    document.getElementById("menuToggle");
-
-const mobileNav =
-    document.getElementById("mobileNav");
-
+const menuToggle = document.getElementById("menuToggle");
+const mobileNav = document.getElementById("mobileNav");
 
 if (menuToggle && mobileNav) {
-
-    menuToggle.addEventListener(
-        "click",
-        () => {
-
-            mobileNav.classList.toggle("open");
-
-            menuToggle.classList.toggle("open");
-
-        }
-    );
-
+    menuToggle.addEventListener("click", () => {
+        mobileNav.classList.toggle("open");
+        menuToggle.classList.toggle("open");
+    });
 }
 
 
@@ -29,118 +17,169 @@ if (menuToggle && mobileNav) {
    CLOSE MOBILE MENU
 ========================================================= */
 
-const mobileLinks =
-    document.querySelectorAll(
-        ".mobile-nav a"
-    );
-
+const mobileLinks = document.querySelectorAll(".mobile-nav a");
 
 mobileLinks.forEach(link => {
+    link.addEventListener("click", () => {
 
-    link.addEventListener(
-        "click",
-        () => {
-
-            if (mobileNav) {
-
-                mobileNav.classList.remove(
-                    "open"
-                );
-
-            }
-
-            if (menuToggle) {
-
-                menuToggle.classList.remove(
-                    "open"
-                );
-
-            }
-
+        if (mobileNav) {
+            mobileNav.classList.remove("open");
         }
-    );
 
+        if (menuToggle) {
+            menuToggle.classList.remove("open");
+        }
+
+    });
 });
 
 
-
 /* =========================================================
-   SCROLL REVEAL ANIMATION
+   GENERAL SCROLL REVEAL
 ========================================================= */
 
 const animatedElements =
-    document.querySelectorAll(
-        ".reveal"
-    );
+    document.querySelectorAll(".reveal");
 
 
 if (animatedElements.length > 0) {
 
     const animationObserver =
         new IntersectionObserver(
-
             (entries) => {
 
                 entries.forEach(entry => {
 
-                    const element =
-                        entry.target;
-
+                    const element = entry.target;
 
                     if (entry.isIntersecting) {
 
                         const delay =
                             element.dataset.delay || 0;
 
-
                         element.style.setProperty(
                             "--delay",
                             `${delay}ms`
                         );
 
+                        element.classList.add("show");
 
-                        element.classList.add(
-                            "show"
-                        );
+                    } else {
 
-                    }
-
-                    else {
-
-                        element.classList.remove(
-                            "show"
-                        );
+                        element.classList.remove("show");
 
                     }
 
                 });
 
             },
-
             {
-
                 threshold: 0.12,
-
-                rootMargin:
-                    "0px 0px -50px 0px"
-
+                rootMargin: "0px 0px -50px 0px"
             }
-
         );
 
 
-    animatedElements.forEach(
-        element => {
-
-            animationObserver.observe(
-                element
-            );
-
-        }
-    );
+    animatedElements.forEach(element => {
+        animationObserver.observe(element);
+    });
 
 }
 
+
+/* =========================================================
+   FACULTY CARD SCROLL REVEAL
+========================================================= */
+
+/*
+    IMPORTANT:
+
+    Faculty card-এর HTML এমন হতে হবে:
+
+    <div class="card-scroll">
+        <div class="card">
+            ...
+        </div>
+    </div>
+
+    .card-scroll = scroll animation
+    .card        = 3D tilt
+*/
+
+const cardScrollElements =
+    document.querySelectorAll(".card-scroll");
+
+
+let cardScrollStarted = false;
+
+
+/*
+    প্রথম page load-এর সময় observer চালু হবে না।
+
+    User প্রথমবার scroll করার পর
+    observer চালু হবে।
+*/
+
+function startCardScrollObserver() {
+
+    if (cardScrollStarted) {
+        return;
+    }
+
+    cardScrollStarted = true;
+
+
+    if (cardScrollElements.length === 0) {
+        return;
+    }
+
+
+    const cardScrollObserver =
+        new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("show");
+
+                    } else {
+
+                        entry.target.classList.remove("show");
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.15,
+                rootMargin: "0px 0px -30px 0px"
+            }
+        );
+
+
+    cardScrollElements.forEach(element => {
+        cardScrollObserver.observe(element);
+    });
+
+}
+
+
+/*
+    User scroll করলেই
+    faculty card observer চালু হবে।
+*/
+
+window.addEventListener(
+    "scroll",
+    startCardScrollObserver,
+    {
+        once: true,
+        passive: true
+    }
+);
 
 
 /* =========================================================
@@ -148,15 +187,10 @@ if (animatedElements.length > 0) {
 ========================================================= */
 
 const sections =
-    document.querySelectorAll(
-        "section[id]"
-    );
-
+    document.querySelectorAll("section[id]");
 
 const navLinks =
-    document.querySelectorAll(
-        ".desktop-nav a"
-    );
+    document.querySelectorAll(".desktop-nav a");
 
 
 if (
@@ -166,68 +200,52 @@ if (
 
     const navObserver =
         new IntersectionObserver(
-
             (entries) => {
 
                 entries.forEach(entry => {
 
-                    if (
-                        entry.isIntersecting
-                    ) {
+                    if (entry.isIntersecting) {
 
                         const id =
                             entry.target.id;
 
 
-                        navLinks.forEach(
-                            link => {
+                        navLinks.forEach(link => {
 
-                                link.classList.remove(
+                            link.classList.remove(
+                                "active"
+                            );
+
+
+                            if (
+                                link.getAttribute("href") ===
+                                `#${id}`
+                            ) {
+
+                                link.classList.add(
                                     "active"
                                 );
 
-
-                                if (
-                                    link.getAttribute(
-                                        "href"
-                                    ) ===
-                                    `#${id}`
-                                ) {
-
-                                    link.classList.add(
-                                        "active"
-                                    );
-
-                                }
-
                             }
-                        );
+
+                        });
 
                     }
 
                 });
 
             },
-
             {
-
                 threshold: 0.35
-
             }
-
         );
 
 
     sections.forEach(section => {
-
-        navObserver.observe(
-            section
-        );
-
+        navObserver.observe(section);
     });
 
 }
-
 
 
 /* =========================================================
@@ -235,9 +253,7 @@ if (
 ========================================================= */
 
 const buttons =
-    document.querySelectorAll(
-        ".btn"
-    );
+    document.querySelectorAll(".btn");
 
 
 buttons.forEach(button => {
@@ -247,9 +263,7 @@ buttons.forEach(button => {
         function (event) {
 
             const ripple =
-                document.createElement(
-                    "span"
-                );
+                document.createElement("span");
 
 
             const rect =
@@ -266,95 +280,60 @@ buttons.forEach(button => {
             ripple.style.position =
                 "absolute";
 
-
             ripple.style.width =
                 `${size}px`;
-
 
             ripple.style.height =
                 `${size}px`;
 
-
             ripple.style.borderRadius =
                 "50%";
-
 
             ripple.style.background =
                 "rgba(255,255,255,.3)";
 
-
             ripple.style.left =
                 `${event.clientX - rect.left - size / 2}px`;
-
 
             ripple.style.top =
                 `${event.clientY - rect.top - size / 2}px`;
 
-
             ripple.style.transform =
                 "scale(0)";
-
 
             ripple.style.pointerEvents =
                 "none";
 
 
-            this.appendChild(
-                ripple
-            );
+            this.appendChild(ripple);
 
 
             ripple.animate(
-
                 [
                     {
-
-                        transform:
-                            "scale(0)",
-
-                        opacity:
-                            1
-
+                        transform: "scale(0)",
+                        opacity: 1
                     },
-
                     {
-
-                        transform:
-                            "scale(2.5)",
-
-                        opacity:
-                            0
-
+                        transform: "scale(2.5)",
+                        opacity: 0
                     }
                 ],
-
                 {
-
-                    duration:
-                        600,
-
-                    easing:
-                        "ease-out"
-
+                    duration: 600,
+                    easing: "ease-out"
                 }
-
             );
 
 
-            setTimeout(
-                () => {
-
-                    ripple.remove();
-
-                },
-                650
-            );
+            setTimeout(() => {
+                ripple.remove();
+            }, 650);
 
         }
     );
 
 });
-
 
 
 /* =========================================================
@@ -376,32 +355,30 @@ window.addEventListener(
 
         if (!ticking) {
 
-            window.requestAnimationFrame(
-                () => {
+            window.requestAnimationFrame(() => {
 
-                    const scrollY =
-                        window.scrollY;
-
-
-                    pageDecorations.forEach(
-                        (element, index) => {
-
-                            const speed =
-                                0.015 +
-                                index * 0.004;
+                const scrollY =
+                    window.scrollY;
 
 
-                            element.style.marginTop =
-                                `${scrollY * speed}px`;
+                pageDecorations.forEach(
+                    (element, index) => {
 
-                        }
-                    );
+                        const speed =
+                            0.015 +
+                            index * 0.004;
 
 
-                    ticking = false;
+                        element.style.marginTop =
+                            `${scrollY * speed}px`;
 
-                }
-            );
+                    }
+                );
+
+
+                ticking = false;
+
+            });
 
 
             ticking = true;
@@ -412,19 +389,9 @@ window.addEventListener(
 );
 
 
-
 /* =========================================================
    FACULTY / MEMBER / INFO CARD 3D TILT
 ========================================================= */
-
-/*
-    IMPORTANT:
-
-    এখানে variable-এর নাম cards3D করা হয়েছে।
-
-    কারণ আপনার code-এ আগে থেকেই "cards" variable
-    অন্য জায়গায় ব্যবহার করা হয়েছে।
-*/
 
 const cards3D =
     document.querySelectorAll(
@@ -438,16 +405,10 @@ cards3D.forEach(card => {
         "mousemove",
         event => {
 
-            /*
-                Mobile-এ tilt বন্ধ
-            */
+            /* Mobile-এ tilt বন্ধ */
 
-            if (
-                window.innerWidth <= 600
-            ) {
-
+            if (window.innerWidth <= 600) {
                 return;
-
             }
 
 
@@ -486,7 +447,6 @@ cards3D.forEach(card => {
 
 
             card.style.transform =
-
                 `
                 perspective(700px)
                 rotateX(${rotateX}deg)
@@ -503,8 +463,7 @@ cards3D.forEach(card => {
         "mouseleave",
         () => {
 
-            card.style.transform =
-                "";
+            card.style.transform = "";
 
         }
     );
@@ -512,23 +471,12 @@ cards3D.forEach(card => {
 });
 
 
-
 /* =========================================================
    PROFILE / FACULTY CARD 3D TILT
 ========================================================= */
 
-/*
-    আপনার নতুন underwater card-এর জন্য
-    .card ব্যবহার করা হয়েছে।
-
-    এখানে cards2 নাম দেওয়া হয়েছে,
-    যাতে variable conflict না হয়।
-*/
-
 const cards2 =
-    document.querySelectorAll(
-        ".card"
-    );
+    document.querySelectorAll(".card");
 
 
 cards2.forEach(card => {
@@ -537,17 +485,10 @@ cards2.forEach(card => {
         "mousemove",
         function (event) {
 
+            /* Mobile-এ 3D effect বন্ধ */
 
-            /*
-                Mobile-এ 3D effect বন্ধ
-            */
-
-            if (
-                window.innerWidth <= 600
-            ) {
-
+            if (window.innerWidth <= 600) {
                 return;
-
             }
 
 
@@ -582,7 +523,6 @@ cards2.forEach(card => {
 
 
             card.style.transform =
-
                 `
                 translateY(-12px)
                 scale(1.02)
@@ -598,8 +538,7 @@ cards2.forEach(card => {
         "mouseleave",
         function () {
 
-            card.style.transform =
-                "";
+            card.style.transform = "";
 
         }
     );
@@ -607,15 +546,12 @@ cards2.forEach(card => {
 });
 
 
-
 /* =========================================================
    IMAGE LOAD FALLBACK
 ========================================================= */
 
 const images =
-    document.querySelectorAll(
-        "img"
-    );
+    document.querySelectorAll("img");
 
 
 images.forEach(img => {
@@ -642,7 +578,6 @@ images.forEach(img => {
 });
 
 
-
 /* =========================================================
    PAGE LOAD
 ========================================================= */
@@ -659,15 +594,12 @@ window.addEventListener(
 );
 
 
-
 /* =========================================================
    HERO REGISTER BUTTON
 ========================================================= */
 
 const regiBtn =
-    document.getElementById(
-        "registerBtn"
-    );
+    document.getElementById("registerBtn");
 
 
 if (regiBtn) {
@@ -680,7 +612,6 @@ if (regiBtn) {
                 "btn-outline"
             );
 
-
             regiBtn.classList.add(
                 "btn-primary"
             );
@@ -697,7 +628,6 @@ if (regiBtn) {
                 "btn-primary"
             );
 
-
             regiBtn.classList.add(
                 "btn-outline"
             );
@@ -708,15 +638,12 @@ if (regiBtn) {
 }
 
 
-
 /* =========================================================
    HERO DETAIL BUTTON
 ========================================================= */
 
 const detailBtn =
-    document.getElementById(
-        "detailBtn"
-    );
+    document.getElementById("detailBtn");
 
 
 if (detailBtn) {
@@ -728,7 +655,6 @@ if (detailBtn) {
             detailBtn.classList.remove(
                 "btn-outline"
             );
-
 
             detailBtn.classList.add(
                 "btn-primary"
@@ -746,7 +672,6 @@ if (detailBtn) {
                 "btn-primary"
             );
 
-
             detailBtn.classList.add(
                 "btn-outline"
             );
@@ -757,19 +682,15 @@ if (detailBtn) {
 }
 
 
-
 /* =========================================================
    CREATE BUBBLES
 ========================================================= */
 
 const bubbles =
-    document.getElementById(
-        "bubbles"
-    );
+    document.getElementById("bubbles");
 
 
 if (bubbles) {
-
 
     for (
         let i = 0;
@@ -777,11 +698,8 @@ if (bubbles) {
         i++
     ) {
 
-
         const bubble =
-            document.createElement(
-                "span"
-            );
+            document.createElement("span");
 
 
         bubble.className =
@@ -794,7 +712,6 @@ if (bubbles) {
 
         bubble.style.width =
             size + "px";
-
 
         bubble.style.height =
             size + "px";
@@ -812,14 +729,11 @@ if (bubbles) {
             Math.random() * 12 + "s";
 
 
-        bubbles.appendChild(
-            bubble
-        );
+        bubbles.appendChild(bubble);
 
     }
 
 }
-
 
 
 /* =========================================================
@@ -827,13 +741,10 @@ if (bubbles) {
 ========================================================= */
 
 const particles =
-    document.getElementById(
-        "particles"
-    );
+    document.getElementById("particles");
 
 
 if (particles) {
-
 
     for (
         let i = 0;
@@ -841,11 +752,8 @@ if (particles) {
         i++
     ) {
 
-
         const particle =
-            document.createElement(
-                "span"
-            );
+            document.createElement("span");
 
 
         particle.className =
