@@ -6,10 +6,14 @@ const menuToggle = document.getElementById("menuToggle");
 const mobileNav = document.getElementById("mobileNav");
 
 if (menuToggle && mobileNav) {
+
     menuToggle.addEventListener("click", () => {
+
         mobileNav.classList.toggle("open");
         menuToggle.classList.toggle("open");
+
     });
+
 }
 
 
@@ -17,9 +21,11 @@ if (menuToggle && mobileNav) {
    CLOSE MOBILE MENU
 ========================================================= */
 
-const mobileLinks = document.querySelectorAll(".mobile-nav a");
+const mobileLinks =
+    document.querySelectorAll(".mobile-nav a");
 
 mobileLinks.forEach(link => {
+
     link.addEventListener("click", () => {
 
         if (mobileNav) {
@@ -31,6 +37,7 @@ mobileLinks.forEach(link => {
         }
 
     });
+
 });
 
 
@@ -40,7 +47,6 @@ mobileLinks.forEach(link => {
 
 const animatedElements =
     document.querySelectorAll(".reveal");
-
 
 if (animatedElements.length > 0) {
 
@@ -81,7 +87,9 @@ if (animatedElements.length > 0) {
 
 
     animatedElements.forEach(element => {
+
         animationObserver.observe(element);
+
     });
 
 }
@@ -91,34 +99,11 @@ if (animatedElements.length > 0) {
    FACULTY CARD SCROLL REVEAL
 ========================================================= */
 
-/*
-    IMPORTANT:
-
-    Faculty card-এর HTML এমন হতে হবে:
-
-    <div class="card-scroll">
-        <div class="card">
-            ...
-        </div>
-    </div>
-
-    .card-scroll = scroll animation
-    .card        = 3D tilt
-*/
-
 const cardScrollElements =
     document.querySelectorAll(".card-scroll");
 
-
 let cardScrollStarted = false;
 
-
-/*
-    প্রথম page load-এর সময় observer চালু হবে না।
-
-    User প্রথমবার scroll করার পর
-    observer চালু হবে।
-*/
 
 function startCardScrollObserver() {
 
@@ -161,16 +146,13 @@ function startCardScrollObserver() {
 
 
     cardScrollElements.forEach(element => {
+
         cardScrollObserver.observe(element);
+
     });
 
 }
 
-
-/*
-    User scroll করলেই
-    faculty card observer চালু হবে।
-*/
 
 window.addEventListener(
     "scroll",
@@ -212,9 +194,7 @@ if (
 
                         navLinks.forEach(link => {
 
-                            link.classList.remove(
-                                "active"
-                            );
+                            link.classList.remove("active");
 
 
                             if (
@@ -222,9 +202,7 @@ if (
                                 `#${id}`
                             ) {
 
-                                link.classList.add(
-                                    "active"
-                                );
+                                link.classList.add("active");
 
                             }
 
@@ -242,7 +220,9 @@ if (
 
 
     sections.forEach(section => {
+
         navObserver.observe(section);
+
     });
 
 }
@@ -327,7 +307,9 @@ buttons.forEach(button => {
 
 
             setTimeout(() => {
+
                 ripple.remove();
+
             }, 650);
 
         }
@@ -729,7 +711,9 @@ if (bubbles) {
             Math.random() * 12 + "s";
 
 
-        bubbles.appendChild(bubble);
+        bubbles.appendChild(
+            bubble
+        );
 
     }
 
@@ -781,5 +765,652 @@ if (particles) {
         );
 
     }
+
+}
+
+
+/* =========================================================
+   REGISTRATION SEARCH
+========================================================= */
+
+const heroSearchInput =
+    document.getElementById(
+        "heroSearchInput"
+    );
+
+
+const heroSearchButton =
+    document.getElementById(
+        "heroSearchButton"
+    );
+
+
+const heroSearchMessage =
+    document.getElementById(
+        "heroSearchMessage"
+    );
+
+
+const registrationModal =
+    document.getElementById(
+        "registrationModal"
+    );
+
+
+const registrationModalContent =
+    document.getElementById(
+        "registrationModalContent"
+    );
+
+
+const closeRegistrationModal =
+    document.getElementById(
+        "closeRegistrationModal"
+    );
+
+
+/* =========================================================
+   GOOGLE APPS SCRIPT API
+========================================================= */
+
+const REGISTRATION_API =
+    "https://script.google.com/macros/s/AKfycbyA64-oZJvFzcn4rj4GqwQiwVCslSRz9SmKn7niEPfADAHVuJjrZHFuokkokPTgWvjr/exec";
+
+
+/* =========================================================
+   SEARCH FUNCTION
+========================================================= */
+
+async function searchRegistration() {
+
+    if (!heroSearchInput) {
+        return;
+    }
+
+
+    const searchValue =
+        heroSearchInput.value.trim();
+
+
+    /* Empty input */
+
+    if (!searchValue) {
+
+        showSearchMessage(
+            "মোবাইল অথবা রেজিস্ট্রেশন নম্বর লিখুন।",
+            "error"
+        );
+
+        heroSearchInput.focus();
+
+        return;
+    }
+
+
+    /* Loading */
+
+    if (heroSearchButton) {
+
+        heroSearchButton.disabled = true;
+
+        heroSearchButton.textContent =
+            "•••";
+
+    }
+
+
+    showSearchMessage(
+        "তথ্য খোঁজা হচ্ছে...",
+        ""
+    );
+
+
+    try {
+
+        const apiURL =
+            REGISTRATION_API +
+            "?search=" +
+            encodeURIComponent(
+                searchValue
+            );
+
+
+        const response =
+            await fetch(apiURL);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Server response error"
+            );
+
+        }
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "Registration API:",
+            result
+        );
+
+
+        /* ---------------------------------------------
+           NOT FOUND
+        --------------------------------------------- */
+
+        if (
+            result.success !== true ||
+            result.found !== true
+        ) {
+
+            showSearchMessage(
+                "এই মোবাইল বা রেজিস্ট্রেশন নম্বরের কোনো তথ্য পাওয়া যায়নি।",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /* ---------------------------------------------
+           FOUND
+        --------------------------------------------- */
+
+        showSearchMessage(
+            "রেজিস্ট্রেশন তথ্য পাওয়া গেছে।",
+            "success"
+        );
+
+
+        openRegistrationModal(
+            result.data
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Registration Search Error:",
+            error
+        );
+
+
+        showSearchMessage(
+            "তথ্য আনতে সমস্যা হয়েছে। আবার চেষ্টা করুন।",
+            "error"
+        );
+
+
+    } finally {
+
+        if (heroSearchButton) {
+
+            heroSearchButton.disabled = false;
+
+            heroSearchButton.textContent =
+                "🔍";
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   OPEN REGISTRATION POPUP
+========================================================= */
+
+function openRegistrationModal(data) {
+
+    if (
+        !registrationModal ||
+        !registrationModalContent
+    ) {
+        return;
+    }
+
+
+    registrationModalContent.innerHTML = `
+
+        <div class="registration-info-grid">
+
+
+            <!-- বাংলা নাম -->
+
+            <div class="registration-info-item">
+
+                <span class="registration-info-label">
+                    বাংলা নাম
+                </span>
+
+                <span class="registration-info-value">
+                    ${safeHTML(data.banglaName)}
+                </span>
+
+            </div>
+
+
+            <!-- English Name -->
+
+            <div class="registration-info-item">
+
+                <span class="registration-info-label">
+                    English Name
+                </span>
+
+                <span class="registration-info-value">
+                    ${safeHTML(data.englishName)}
+                </span>
+
+            </div>
+
+
+            <!-- Mobile -->
+
+            <div class="registration-info-item">
+
+                <span class="registration-info-label">
+                    Mobile Number
+                </span>
+
+                <span class="registration-info-value">
+                    ${safeHTML(data.mobile)}
+                </span>
+
+            </div>
+
+
+            <!-- Registration Number -->
+
+            <div class="registration-info-item">
+
+                <span class="registration-info-label">
+                    Registration Number
+                </span>
+
+                <span class="registration-info-value">
+                    ${safeHTML(
+                        data.registrationNumber
+                    )}
+                </span>
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="registration-info-item">
+
+                <span class="registration-info-label">
+                    Email
+                </span>
+
+                <span class="registration-info-value">
+                    ${safeHTML(data.email)}
+                </span>
+
+            </div>
+
+
+            <!-- WhatsApp -->
+
+            <div class="registration-info-item">
+
+                <span class="registration-info-label">
+                    WhatsApp
+                </span>
+
+                <span class="registration-info-value">
+                    ${safeHTML(data.whatsapp)}
+                </span>
+
+            </div>
+
+
+            <!-- Guardian Number -->
+
+            <div class="registration-info-item">
+
+                <span class="registration-info-label">
+                    Guardian Contact Number
+                </span>
+
+                <span class="registration-info-value">
+                    ${safeHTML(
+                        data.guardianNumber
+                    )}
+                </span>
+
+            </div>
+
+
+            <!-- Tour Fee -->
+
+            <div class="registration-info-item">
+
+                <span class="registration-info-label">
+                    Tour Fee
+                </span>
+
+                <span class="registration-info-value">
+                    ${formatTourFee(data.tourFee)}
+                </span>
+
+            </div>
+
+
+            <!-- Facebook -->
+
+            <div class="registration-info-item">
+
+                <span class="registration-info-label">
+                    Facebook
+                </span>
+
+                <span class="registration-info-value">
+
+                    ${
+                        data.fbLink
+                            ? `
+                                <a
+                                    href="${safeAttribute(
+                                        data.fbLink
+                                    )}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    View Facebook Profile
+                                </a>
+                            `
+                            : "-"
+                    }
+
+                </span>
+
+            </div>
+
+
+            <!-- Registration Time -->
+
+            <div class="registration-info-item">
+
+                <span class="registration-info-label">
+                    Registration Time
+                </span>
+
+                <span class="registration-info-value">
+                    ${safeHTML(data.timestamp)}
+                </span>
+
+            </div>
+
+
+            <!-- Address -->
+
+            <div class="
+                registration-info-item
+                full-width
+            ">
+
+                <span class="registration-info-label">
+                    Address
+                </span>
+
+                <span class="registration-info-value">
+                    ${safeHTML(data.address)}
+                </span>
+
+
+                    <div class="registration-modal-actions">
+
+    </div>
+
+            </div>
+
+            <div class="registration-info-grid">
+
+        <!-- আপনার সব registration information এখানে থাকবে -->
+
+    </div>
+
+
+
+
+</div>
+
+        
+
+    `;
+
+
+
+
+    registrationModal.classList.add(
+        "show"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* =========================================================
+   CLOSE REGISTRATION POPUP
+========================================================= */
+
+function closeRegistrationModalWindow() {
+
+    if (!registrationModal) {
+        return;
+    }
+
+
+    registrationModal.classList.remove(
+        "show"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* Close button */
+
+if (closeRegistrationModal) {
+
+    closeRegistrationModal.addEventListener(
+        "click",
+        closeRegistrationModalWindow
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE BY CLICKING OUTSIDE
+========================================================= */
+
+if (registrationModal) {
+
+    const modalOverlay =
+        registrationModal.querySelector(
+            ".registration-modal-overlay"
+        );
+
+
+    if (modalOverlay) {
+
+        modalOverlay.addEventListener(
+            "click",
+            closeRegistrationModalWindow
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CLOSE BY ESC KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape" &&
+            registrationModal &&
+            registrationModal.classList.contains(
+                "show"
+            )
+        ) {
+
+            closeRegistrationModalWindow();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SEARCH BUTTON CLICK
+========================================================= */
+
+if (heroSearchButton) {
+
+    heroSearchButton.addEventListener(
+        "click",
+        searchRegistration
+    );
+
+}
+
+
+/* =========================================================
+   ENTER KEY SEARCH
+========================================================= */
+
+if (heroSearchInput) {
+
+    heroSearchInput.addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                searchRegistration();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH MESSAGE
+========================================================= */
+
+function showSearchMessage(
+    message,
+    type
+) {
+
+    if (!heroSearchMessage) {
+        return;
+    }
+
+
+    heroSearchMessage.textContent =
+        message;
+
+
+    heroSearchMessage.className =
+        "hero-search-message";
+
+
+    if (type) {
+
+        heroSearchMessage.classList.add(
+            type
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   HTML SECURITY
+========================================================= */
+
+function safeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   SAFE URL
+========================================================= */
+
+function safeAttribute(value) {
+
+    return String(value ?? "")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   TOUR FEE
+========================================================= */
+
+function formatTourFee(value) {
+
+    const fee =
+        String(value || "")
+            .trim()
+            .toLowerCase();
+
+
+    if (fee === "yes") {
+
+        return "Paid";
+
+    }
+
+
+    if (fee === "no") {
+
+        return "Not Paid";
+
+    }
+
+
+    return safeHTML(
+        value || "-"
+    );
 
 }

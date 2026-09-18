@@ -643,6 +643,676 @@ img {
    HERO
 ========================================================= */
 
+
+
+
+
+
+
+
+
+
+
+
+/* =====================================================
+   HERO SEARCH
+===================================================== */
+
+.hero-registration-search {
+
+    width: 100%;
+
+    max-width: 680px;
+
+    margin: 18px auto 0;
+
+    position: relative;
+
+    z-index: 20;
+
+}
+
+
+/* =====================================================
+   SEARCH BOX
+===================================================== */
+
+.hero-search-box {
+
+    width: 100%;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 5px 6px 5px 18px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.38);
+
+    backdrop-filter: blur(14px);
+
+    -webkit-backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.25);
+
+    transition: 0.3s ease;
+
+}
+
+
+.hero-search-box:focus-within {
+
+    border-color:
+        rgba(42, 220, 220, 0.8);
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    box-shadow:
+        0 0 25px
+        rgba(30, 210, 210, 0.18);
+
+}
+
+
+/* =====================================================
+   SEARCH ICON
+===================================================== */
+
+.hero-search-icon {
+
+    width: 35px;
+
+    flex-shrink: 0;
+
+    font-size: 20px;
+
+    opacity: 0.9;
+
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+#heroSearchInput {
+
+    flex: 1;
+
+    min-width: 0;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    padding: 0 10px;
+
+}
+
+
+#heroSearchInput::placeholder {
+
+    color:
+        rgba(255, 255, 255, 0.72);
+
+}
+
+
+/* =====================================================
+   SEARCH BUTTON
+===================================================== */
+
+#heroSearchButton {
+
+    width: 48px;
+
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #20d4d7;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: 0.25s ease;
+
+}
+
+
+#heroSearchButton:hover {
+
+    transform: scale(1.07);
+
+    background: #13bec1;
+
+}
+
+
+#heroSearchButton:disabled {
+
+    opacity: 0.6;
+
+    cursor: wait;
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.hero-search-message {
+
+    min-height: 22px;
+
+    margin-top: 7px;
+
+    text-align: center;
+
+    color:
+        rgba(255, 255, 255, 0.8);
+
+    font-size: 13px;
+
+}
+
+
+.hero-search-message.error {
+
+    color: #ff8f8f;
+
+}
+
+
+.hero-search-message.success {
+
+    color: #76f5dc;
+
+}
+
+
+/* =====================================================
+   REGISTRATION MODAL
+===================================================== */
+
+.registration-modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+}
+
+
+.registration-modal.show {
+
+    display: flex;
+
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.registration-modal-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(0, 10, 16, 0.78);
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
+
+}
+
+
+/* =====================================================
+   MODAL BOX
+===================================================== */
+
+.registration-modal-box {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    position: relative;
+
+    z-index: 2;
+
+    padding: 28px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(10, 43, 53, 0.97),
+            rgba(5, 25, 33, 0.97)
+        );
+    margin-top: 150px;
+
+    border:
+        1px solid
+        rgba(60, 220, 220, 0.35);
+
+    box-shadow:
+        0 25px 80px
+        rgba(0, 0, 0, 0.55);
+
+    animation:
+        modalOpen 0.35s ease;
+
+}
+
+
+@keyframes modalOpen {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.96);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.registration-modal-close {
+
+    position: absolute;
+
+    top: 14px;
+
+    right: 16px;
+
+    width: 38px;
+
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    color: #ffffff;
+
+    font-size: 27px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+}
+
+
+.registration-modal-close:hover {
+
+    background:
+        rgba(255, 80, 80, 0.2);
+
+    transform: rotate(90deg);
+
+}
+
+
+/* =====================================================
+   MODAL HEADER
+===================================================== */
+
+.registration-modal-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding-right: 40px;
+
+    margin-bottom: 24px;
+
+}
+
+
+.registration-modal-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(32, 212, 215, 0.13);
+
+    border:
+        1px solid
+        rgba(32, 212, 215, 0.35);
+
+    color: #39e0d4;
+
+    font-size: 22px;
+
+}
+
+
+.registration-modal-header h2 {
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 21px;
+
+}
+
+
+.registration-modal-header p {
+
+    margin: 4px 0 0;
+
+    color:
+        rgba(255, 255, 255, 0.5);
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+   INFORMATION GRID
+===================================================== */
+
+.registration-info-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+
+}
+
+
+/* =====================================================
+   INFORMATION ITEM
+===================================================== */
+
+.registration-info-item {
+
+    padding: 13px 14px;
+
+    border-radius: 11px;
+
+    background:
+        rgba(255, 255, 255, 0.055);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+}
+
+
+.registration-info-label {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color:
+        rgba(255, 255, 255, 0.45);
+
+    font-size: 11px;
+
+}
+
+
+.registration-info-value {
+
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    word-break: break-word;
+
+}
+
+
+/* =====================================================
+   FULL WIDTH ITEM
+===================================================== */
+
+.registration-info-item.full-width {
+
+    grid-column: 1 / -1;
+
+}
+
+
+/* =====================================================
+   LINK
+===================================================== */
+
+.registration-info-value a {
+
+    color: #45dedc;
+
+    text-decoration: none;
+
+}
+
+
+.registration-info-value a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .hero-registration-search {
+
+        width:
+            calc(100% - 30px);
+
+        margin-top: 14px;
+
+    }
+
+
+    .hero-search-box {
+
+        height: 54px;
+
+        padding-left: 13px;
+
+    }
+
+
+    #heroSearchInput {
+
+        font-size: 12px;
+
+        padding: 0 5px;
+
+    }
+
+
+    #heroSearchInput::placeholder {
+
+        font-size: 10px;
+
+    }
+
+
+    #heroSearchButton {
+
+        width: 44px;
+
+        height: 44px;
+
+    }
+
+
+    .registration-modal {
+
+        padding: 12px;
+
+    }
+
+
+    .registration-modal-box {
+
+        max-height: 92vh;
+
+        padding: 21px 16px;
+
+        border-radius: 18px;
+
+    }
+
+
+    .registration-modal-header h2 {
+
+        font-size: 17px;
+
+    }
+
+
+    .registration-info-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .registration-info-item.full-width {
+
+        grid-column: auto;
+
+    }
+
+}
+
+
+
+
+/* =========================================================
+   REGISTRATION MODAL CANCEL BUTTON
+========================================================= */
+
+.registration-modal-actions {
+    display: flex;
+    justify-content: center;
+    padding-top: 18px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .hero {
     position: relative;
 
@@ -3529,6 +4199,10 @@ img {
 
 @media (max-width: 600px) {
 
+    .hero-content{
+        margin-top: 120px;
+    }
+
     .navbar {
         height: 62px;
 
@@ -3746,6 +4420,10 @@ img {
 ========================================================= */
 
 @media (max-width: 380px) {
+
+    .hero-content{
+        margin-top: 180px;
+    }
 
     .hero h1 {
         font-size:
