@@ -1677,7 +1677,7 @@ img {
     position: relative;
 
     padding:
-        65px 55px;
+        40px 55px;
 
     background:
         linear-gradient(
@@ -3280,7 +3280,7 @@ img {
             .team-section {
 
                 padding:
-                    30px
+                    10px
                     20px
                     150px;
 
@@ -3553,7 +3553,7 @@ img {
 
     font-weight: 700;
 
-    font-size: 10px;
+    font-size: 18px;
 
     background:
         linear-gradient(
@@ -3564,7 +3564,7 @@ img {
 }
 
 .route-item h3 {
-    font-size: 13px;
+    font-size: 18px;
 }
 
 .route-item p {
@@ -3573,7 +3573,7 @@ img {
     color:
         #819ca5;
 
-    font-size: 8px;
+    font-size: 13px;
 }
 
 .route-line {
@@ -3623,20 +3623,20 @@ img {
     color:
         #718d96;
 
-    font-size: 7px;
+    font-size: 14px;
 }
 
 .map-header h3 {
     margin-top: 3px;
 
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .map-header p {
     color:
         #89a5ad;
 
-    font-size: 8px;
+    font-size: 13px;
 }
 
 .location-icon {
@@ -3688,61 +3688,26 @@ img {
         );
 }
 
-.map-road {
-    position: absolute;
-
-    background:
-        rgba(218, 233, 207, .2);
-
-    border-radius: 50%;
+.map {
+    width: 100%;
+    height: 474px;
+    overflow: hidden;
+    border-radius: 15px;
 }
 
-.road-a {
-    width: 150%;
-    height: 10px;
-
-    left: -25%;
-    top: 45%;
-
-    transform:
-        rotate(-20deg);
+.map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 
-.road-b {
-    width: 10px;
-    height: 150%;
+.map iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
 
-    left: 52%;
-    top: -25%;
-
-    transform:
-        rotate(17deg);
+    filter: invert(90%) hue-rotate(180deg);
 }
-
-.road-c {
-    width: 120%;
-    height: 7px;
-
-    left: -10%;
-    top: 70%;
-
-    transform:
-        rotate(35deg);
-}
-
-.map-pin {
-    position: absolute;
-
-    left: 54%;
-    top: 48%;
-
-    font-size: 27px;
-
-    animation:
-        pinBounce 2s ease-in-out infinite;
-}
-
-
 /* =========================================================
    INFO
 ========================================================= */
@@ -3802,7 +3767,7 @@ img {
 }
 
 .info-card h3 {
-    font-size: 12px;
+    font-size: 17px;
 }
 
 .info-card p {
@@ -3811,7 +3776,7 @@ img {
     color:
         #8ca6ae;
 
-    font-size: 8px;
+    font-size: 14px;
 }
 
 
@@ -3860,7 +3825,7 @@ img {
 }
 
 .footer h3 {
-    font-size: 12px;
+    font-size: 18px;
 }
 
 .footer p {
@@ -3869,7 +3834,7 @@ img {
     color:
         #6f8992;
 
-    font-size: 8px;
+    font-size: 14px;
 }
 
 .social-links {
@@ -3915,20 +3880,10 @@ img {
 }
 
 .copyright {
-    margin-top: 25px;
-
-    padding-top: 15px;
-
-    text-align: center;
-
-    color:
-        #4e6871;
-
-    font-size: 7px;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.04);
+    text-align: right;
+    color: #4e6871;
+    font-size: 14px;
+    margin-left: auto;
 }
 
 
@@ -4188,7 +4143,7 @@ img {
 
     .section {
         padding:
-            55px 35px;
+            40px 35px;
     }
 }
 
@@ -4286,7 +4241,7 @@ img {
 
     .section {
         padding:
-            50px 15px;
+            20px 15px;
     }
 
     .section-heading {
@@ -4296,7 +4251,7 @@ img {
 
     .section-heading h2 {
         font-size:
-            18px;
+            23px;
     }
 
 
@@ -4411,6 +4366,11 @@ img {
     .leaf-decoration {
         transform:
             scale(.7);
+    }
+
+    .copyright{
+         margin-left: auto;
+        margin-right: auto;
     }
 }
 

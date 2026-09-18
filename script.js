@@ -1414,3 +1414,81 @@ function formatTourFee(value) {
     );
 
 }
+
+
+// total registerd student 
+
+/* =========================================================
+   TOTAL REGISTRATION COUNT
+========================================================= */
+
+const totalRegistrationsElement =
+    document.getElementById(
+        "totalRegistrations"
+    );
+
+
+async function loadTotalRegistrations() {
+
+    if (!totalRegistrationsElement) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                REGISTRATION_API +
+                "?count=true"
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Count API error"
+            );
+
+        }
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "Total Registrations:",
+            result
+        );
+
+
+        if (
+            result.success === true &&
+            typeof result.totalRegistrations !==
+            "undefined"
+        ) {
+
+            totalRegistrationsElement.textContent =
+                result.totalRegistrations;
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Registration Count Error:",
+            error
+        );
+
+        totalRegistrationsElement.textContent =
+            "0";
+
+    }
+
+}
+
+
+/* Page load হলে count আনবে */
+
+loadTotalRegistrations();
