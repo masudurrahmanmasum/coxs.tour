@@ -4746,7 +4746,7 @@ img {
 
     .hero-small {
         font-size:
-            11px;
+            15px;
     }
 
     .hero h1 {
@@ -4842,7 +4842,7 @@ img {
 
     .committee-grid {
         grid-template-columns:
-            repeat(2, 1fr);
+            repeat(1, 1fr);
 
         gap:
             10px;
