@@ -1,0 +1,1033 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Student Registration</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =====================================================
+           BASIC RESET
+        ===================================================== */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-height: 100vh;
+
+        font-family: "Noto Sans Bengali", sans-serif;
+
+        color: #e9ffff;
+
+        background:
+          radial-gradient(
+            circle at 10% 20%,
+            rgba(0, 255, 220, 0.08),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 90% 80%,
+            rgba(0, 255, 220, 0.08),
+            transparent 30%
+          ),
+          linear-gradient(135deg, #03151e, #061f2b, #02131c);
+
+        overflow-x: hidden;
+      }
+
+      /* =====================================================
+           BACKGROUND EFFECT
+        ===================================================== */
+
+      body::before {
+        content: "";
+
+        position: fixed;
+
+        width: 500px;
+        height: 500px;
+
+        left: -250px;
+        bottom: -250px;
+
+        background: rgba(0, 255, 200, 0.07);
+
+        filter: blur(100px);
+
+        border-radius: 50%;
+
+        pointer-events: none;
+      }
+
+      body::after {
+        content: "";
+
+        position: fixed;
+
+        width: 450px;
+        height: 450px;
+
+        right: -250px;
+        top: -200px;
+
+        background: rgba(0, 220, 255, 0.06);
+
+        filter: blur(100px);
+
+        border-radius: 50%;
+
+        pointer-events: none;
+      }
+
+      /* =====================================================
+           MAIN CONTAINER
+        ===================================================== */
+
+      .registration-section {
+        width: 100%;
+        min-height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 70px 20px;
+      }
+
+      .registration-wrapper {
+        width: 100%;
+        max-width: 900px;
+
+        position: relative;
+      }
+
+      /* =====================================================
+           TOP GLOW LINE
+        ===================================================== */
+
+      .top-line {
+        width: 110px;
+        height: 4px;
+
+        margin: 0 auto 22px;
+
+        border-radius: 20px;
+
+        background: #4de6df;
+
+        box-shadow:
+          0 0 10px #4de6df,
+          0 0 25px rgba(77, 230, 223, 0.6);
+      }
+
+      /* =====================================================
+           HEADING
+        ===================================================== */
+
+      .form-heading {
+        text-align: center;
+
+        margin-bottom: 35px;
+      }
+
+      .form-heading h1 {
+        font-size: 36px;
+
+        font-weight: 800;
+
+        color: #ffffff;
+
+        margin-bottom: 8px;
+
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.12);
+      }
+
+      .form-heading p {
+        color: #62e5df;
+
+        font-size: 15px;
+      }
+
+      /* =====================================================
+           FORM CARD
+        ===================================================== */
+
+      .registration-card {
+        position: relative;
+
+        padding: 45px;
+
+        border: 1px solid rgba(76, 226, 224, 0.38);
+
+        border-radius: 18px;
+
+        background: linear-gradient(
+          135deg,
+          rgba(12, 38, 50, 0.72),
+          rgba(4, 27, 37, 0.82)
+        );
+
+        backdrop-filter: blur(18px);
+
+        -webkit-backdrop-filter: blur(18px);
+
+        box-shadow:
+          0 25px 70px rgba(0, 0, 0, 0.35),
+          inset 0 0 35px rgba(0, 255, 220, 0.025);
+
+        overflow: hidden;
+      }
+
+      /* Card glow */
+
+      .registration-card::before {
+        content: "";
+
+        position: absolute;
+
+        width: 250px;
+        height: 250px;
+
+        right: -130px;
+        bottom: -170px;
+
+        background: rgba(0, 255, 210, 0.15);
+
+        filter: blur(55px);
+
+        border-radius: 50%;
+
+        pointer-events: none;
+      }
+
+      /* =====================================================
+           FORM GRID
+        ===================================================== */
+
+      .form-grid {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 22px;
+      }
+
+      .form-group {
+        display: flex;
+
+        flex-direction: column;
+      }
+
+      .form-group.full {
+        grid-column: 1 / -1;
+      }
+
+      /* =====================================================
+           LABEL
+        ===================================================== */
+
+      .form-group label {
+        font-size: 14px;
+
+        color: #bce8e7;
+
+        margin-bottom: 9px;
+
+        font-weight: 500;
+      }
+
+      .required {
+        color: #48e4dc;
+      }
+
+      /* =====================================================
+           INPUT
+        ===================================================== */
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+
+        padding: 14px 16px;
+
+        border-radius: 10px;
+
+        border: 1px solid rgba(94, 217, 218, 0.25);
+
+        outline: none;
+
+        color: #ffffff;
+
+        background: rgba(2, 20, 29, 0.72);
+
+        font-family: inherit;
+
+        font-size: 14px;
+
+        transition: 0.3s ease;
+      }
+
+      .form-group textarea {
+        min-height: 115px;
+
+        resize: vertical;
+      }
+
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: rgba(203, 235, 235, 0.42);
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: #49ded9;
+
+        box-shadow:
+          0 0 0 3px rgba(73, 222, 217, 0.08),
+          0 0 18px rgba(73, 222, 217, 0.12);
+
+        background: rgba(4, 27, 37, 0.95);
+      }
+
+      /* =====================================================
+           FEE RADIO SECTION
+        ===================================================== */
+
+      .fee-section {
+        grid-column: 1 / -1;
+
+        margin-top: 5px;
+
+        padding: 22px;
+
+        border-radius: 14px;
+
+        border: 1px solid rgba(73, 222, 217, 0.22);
+
+        background: rgba(0, 15, 24, 0.38);
+      }
+
+      .fee-title {
+        display: block;
+
+        margin-bottom: 15px;
+
+        font-size: 15px;
+
+        font-weight: 600;
+
+        color: #ffffff;
+      }
+
+      .radio-options {
+        display: flex;
+
+        gap: 15px;
+
+        flex-wrap: wrap;
+      }
+
+      /* =====================================================
+           RADIO CARD
+        ===================================================== */
+
+      .radio-option {
+        position: relative;
+
+        flex: 1;
+
+        min-width: 150px;
+      }
+
+      .radio-option input {
+        position: absolute;
+
+        opacity: 0;
+
+        pointer-events: none;
+      }
+
+      .radio-option label {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 10px;
+
+        padding: 13px 20px;
+
+        border-radius: 10px;
+
+        border: 1px solid rgba(98, 220, 218, 0.25);
+
+        background: rgba(3, 23, 32, 0.75);
+
+        color: #bfe5e4;
+
+        cursor: pointer;
+
+        transition: 0.3s ease;
+      }
+
+      .radio-circle {
+        width: 17px;
+        height: 17px;
+
+        border-radius: 50%;
+
+        border: 2px solid #69d8d5;
+
+        position: relative;
+      }
+
+      .radio-circle::after {
+        content: "";
+
+        position: absolute;
+
+        width: 7px;
+        height: 7px;
+
+        border-radius: 50%;
+
+        background: #4ce3db;
+
+        left: 3px;
+        top: 3px;
+
+        transform: scale(0);
+
+        transition: 0.2s ease;
+      }
+
+      .radio-option input:checked + label {
+        border-color: #4ce3db;
+
+        background: rgba(0, 190, 180, 0.1);
+
+        box-shadow: 0 0 18px rgba(76, 227, 219, 0.12);
+
+        color: #ffffff;
+      }
+
+      .radio-option input:checked + label .radio-circle::after {
+        transform: scale(1);
+      }
+
+      /* =====================================================
+           SUBMIT BUTTON
+        ===================================================== */
+
+      .submit-area {
+        grid-column: 1 / -1;
+
+        display: flex;
+
+        justify-content: center;
+
+        margin-top: 8px;
+      }
+
+      .submit-btn {
+        border: none;
+
+        outline: none;
+
+        cursor: pointer;
+
+        padding: 15px 48px;
+
+        border-radius: 10px;
+
+        color: #032126;
+
+        background: linear-gradient(135deg, #66eee8, #37cbc8);
+
+        font-family: inherit;
+
+        font-size: 16px;
+
+        font-weight: 700;
+
+        box-shadow: 0 8px 25px rgba(54, 220, 212, 0.18);
+
+        transition: 0.3s ease;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+
+        box-shadow: 0 12px 30px rgba(54, 220, 212, 0.3);
+      }
+
+      .submit-btn:active {
+        transform: translateY(0);
+      }
+
+      /* =====================================================
+           POPUP OVERLAY
+        ===================================================== */
+
+      .popup-overlay {
+        position: fixed;
+
+        inset: 0;
+
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+
+        padding: 20px;
+
+        background: rgba(0, 8, 13, 0.72);
+
+        backdrop-filter: blur(8px);
+
+        -webkit-backdrop-filter: blur(8px);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        transition: 0.3s ease;
+
+        z-index: 9999;
+      }
+
+      .popup-overlay.active {
+        opacity: 1;
+
+        visibility: visible;
+      }
+
+      /* =====================================================
+           POPUP BOX
+        ===================================================== */
+
+      .popup-box {
+        width: 100%;
+
+        max-width: 480px;
+
+        padding: 35px 30px;
+
+        border-radius: 18px;
+
+        border: 1px solid rgba(76, 227, 219, 0.42);
+
+        background: linear-gradient(
+          135deg,
+          rgba(9, 38, 50, 0.96),
+          rgba(2, 20, 29, 0.98)
+        );
+
+        box-shadow:
+          0 25px 80px rgba(0, 0, 0, 0.55),
+          0 0 35px rgba(62, 225, 218, 0.08);
+
+        text-align: center;
+
+        transform: translateY(25px) scale(0.96);
+
+        transition: 0.35s ease;
+      }
+
+      .popup-overlay.active .popup-box {
+        transform: translateY(0) scale(1);
+      }
+
+      /* =====================================================
+           POPUP ICON
+        ===================================================== */
+
+      .popup-icon {
+        width: 65px;
+        height: 65px;
+
+        margin: 0 auto 18px;
+
+        border-radius: 50%;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        font-size: 30px;
+
+        color: #65eee7;
+
+        border: 1px solid rgba(76, 227, 219, 0.5);
+
+        background: rgba(44, 220, 211, 0.08);
+
+        box-shadow: 0 0 25px rgba(76, 227, 219, 0.12);
+      }
+
+      .popup-box h2 {
+        font-size: 25px;
+
+        color: #ffffff;
+
+        margin-bottom: 12px;
+      }
+
+      .popup-box p {
+        color: #c5dfdf;
+
+        font-size: 15px;
+
+        line-height: 1.8;
+
+        margin-bottom: 8px;
+      }
+
+      .fee-message {
+        margin-top: 15px;
+
+        padding: 13px;
+
+        border-radius: 10px;
+
+        background: rgba(70, 221, 215, 0.07);
+
+        border: 1px solid rgba(70, 221, 215, 0.15);
+
+        color: #65e6e1 !important;
+
+        font-weight: 600;
+      }
+
+      .popup-close {
+        margin-top: 20px;
+
+        padding: 11px 30px;
+
+        border: 1px solid rgba(76, 227, 219, 0.35);
+
+        border-radius: 9px;
+
+        background: transparent;
+
+        color: #65e6e1;
+
+        font-family: inherit;
+
+        cursor: pointer;
+
+        transition: 0.3s ease;
+      }
+
+      .popup-close:hover {
+        background: rgba(76, 227, 219, 0.08);
+
+        border-color: #65e6e1;
+      }
+
+      /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+      @media (max-width: 700px) {
+        .registration-section {
+          padding: 45px 15px;
+        }
+
+        .registration-card {
+          padding: 28px 20px;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+
+          gap: 18px;
+        }
+
+        .form-group.full,
+        .fee-section,
+        .submit-area {
+          grid-column: auto;
+        }
+
+        .form-heading h1 {
+          font-size: 28px;
+        }
+
+        .radio-options {
+          flex-direction: column;
+        }
+
+        .radio-option {
+          width: 100%;
+        }
+
+        .submit-btn {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 400px) {
+        .registration-card {
+          padding: 24px 15px;
+        }
+
+        .form-heading h1 {
+          font-size: 24px;
+        }
+
+        .popup-box {
+          padding: 28px 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =====================================================
+         REGISTRATION SECTION
+    ===================================================== -->
+
+    <section class="registration-section">
+      <div class="registration-wrapper">
+        <!-- TOP LINE -->
+
+        <div class="top-line"></div>
+
+        <!-- HEADING -->
+
+        <div class="form-heading">
+          <h1>Student Registration</h1>
+
+          <p>স্টুডেন্ট রেজিস্ট্রেশন ফর্ম</p>
+        </div>
+
+        <!-- FORM CARD -->
+
+        <div class="registration-card">
+          <form id="registrationForm">
+            <div class="form-grid">
+              <!-- বাংলা নাম -->
+
+              <div class="form-group">
+                <label for="banglaName">
+                  বাংলা পূর্ণ নাম
+                  <span class="required">*</span>
+                </label>
+
+                <input
+                  type="text"
+                  id="banglaName"
+                  name="banglaName"
+                  placeholder="আপনার বাংলা পূর্ণ নাম লিখুন"
+                  required
+                />
+              </div>
+
+              <!-- ENGLISH NAME -->
+
+              <div class="form-group">
+                <label for="englishName">
+                  Full Name in English
+                  <span class="required">*</span>
+                </label>
+
+                <input
+                  type="text"
+                  id="englishName"
+                  name="englishName"
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+
+              <!-- MOBILE -->
+
+              <div class="form-group">
+                <label for="mobile">
+                  মোবাইল নম্বর
+                  <span class="required">*</span>
+                </label>
+
+                <input
+                  type="tel"
+                  id="mobile"
+                  name="mobile"
+                  placeholder="01XXXXXXXXX"
+                  required
+                />
+              </div>
+
+              <!-- EMAIL -->
+
+              <div class="form-group">
+                <label for="email"> Email Address </label>
+
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="example@email.com"
+                />
+              </div>
+
+              <!-- REGISTRATION NUMBER -->
+
+              <div class="form-group">
+                <label for="registrationNumber">
+                  Registration Number
+                  <span class="required">*</span>
+                </label>
+
+                <input
+                  type="text"
+                  id="registrationNumber"
+                  name="registrationNumber"
+                  placeholder="Registration Number"
+                  required
+                />
+              </div>
+
+              <!-- WHATSAPP -->
+
+              <div class="form-group">
+                <label for="whatsapp"> WhatsApp Number </label>
+
+                <input
+                  type="tel"
+                  id="whatsapp"
+                  name="whatsapp"
+                  placeholder="WhatsApp Number"
+                />
+              </div>
+
+              <!-- Guardian number -->
+             
+              <div class="form-group">
+                <label for="whatsapp"> Guardian's Contact Number </label>
+
+                <input
+                  type="tel"
+                  id="whatsapp"
+                  name="whatsapp"
+                  placeholder="WhatsApp Number"
+                />
+              </div>
+
+              <!-- Guardian number -->
+             
+              <div class="form-group">
+                <label for="whatsapp"> Facebook Id Link </label>
+
+                <input
+                  type="text"
+                  id="whatsapp"
+                  name="whatsapp"
+                  placeholder="WhatsApp Number"
+                />
+              </div>
+
+              <!-- ADDRESS -->
+
+              <div class="form-group full">
+                <label for="address">
+                  বাসার ঠিকানা
+                  <span class="required">*</span>
+                </label>
+
+                <textarea
+                  id="address"
+                  name="address"
+                  placeholder="আপনার সম্পূর্ণ বাসার ঠিকানা লিখুন"
+                  required
+                ></textarea>
+              </div>
+
+              <!-- FEE -->
+
+              <div class="fee-section">
+                <span class="fee-title">
+                  ট্যুর ফি জমা দিয়েছেন?
+                  <span class="required">*</span>
+                </span>
+
+                <div class="radio-options">
+                  <!-- YES -->
+
+                  <div class="radio-option">
+                    <input
+                      type="radio"
+                      id="feeYes"
+                      name="tourFee"
+                      value="yes"
+                      required
+                    />
+
+                    <label for="feeYes">
+                      <span class="radio-circle"></span>
+
+                      হ্যাঁ, জমা দিয়েছি
+                    </label>
+                  </div>
+
+                  <!-- NO -->
+
+                  <div class="radio-option">
+                    <input type="radio" id="feeNo" name="tourFee" value="no" />
+
+                    <label for="feeNo">
+                      <span class="radio-circle"></span>
+
+                      না, এখনো জমা দিইনি
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SUBMIT -->
+
+              <div class="submit-area">
+                <button type="submit" class="submit-btn">
+                  Submit Registration
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         POPUP
+    ===================================================== -->
+
+    <div class="popup-overlay" id="popupOverlay">
+      <div class="popup-box">
+        <div class="popup-icon">✓</div>
+
+        <h2>ধন্যবাদ!</h2>
+
+        <p>আপনার রেজিস্ট্রেশন ফর্ম সফলভাবে সাবমিট হয়েছে।</p>
+
+        <!-- Dynamic message -->
+
+        <p class="fee-message" id="feeMessage"></p>
+
+        <p>ফর্ম সাবমিট করার জন্য আপনাকে ধন্যবাদ।</p>
+
+        <button type="button" class="popup-close" id="popupClose">
+          বন্ধ করুন
+        </button>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+      const registrationForm = document.getElementById("registrationForm");
+
+      const popupOverlay = document.getElementById("popupOverlay");
+
+      const popupClose = document.getElementById("popupClose");
+
+      const feeMessage = document.getElementById("feeMessage");
+
+      /* =====================================================
+           FORM SUBMIT
+        ===================================================== */
+
+      registrationForm.addEventListener("submit", function (event) {
+        /*
+                    Browser-এর default form submission
+                    বন্ধ করছি।
+                */
+
+        event.preventDefault();
+
+        /*
+                    কোন radio selected হয়েছে
+                    সেটা বের করছি।
+                */
+
+        const selectedFee = document.querySelector(
+          'input[name="tourFee"]:checked',
+        );
+
+        /*
+                    YES হলে
+                */
+
+        if (selectedFee && selectedFee.value === "yes") {
+          feeMessage.textContent = "ফি জমা দেওয়ার জন্য ধন্যবাদ।";
+        } else {
+
+        /*
+                    NO হলে
+                */
+          feeMessage.textContent = "২০/৯/২৬ তারিখের মধ্যে ফি জমা দিয়ে দিন।";
+        }
+
+        /*
+                    Popup দেখানো
+                */
+
+        popupOverlay.classList.add("active");
+
+        /*
+                    এখানে চাইলে পরে
+                    backend/API-তে form data পাঠানো যাবে।
+                */
+      });
+
+      /* =====================================================
+           POPUP CLOSE
+        ===================================================== */
+
+      popupClose.addEventListener("click", function () {
+        popupOverlay.classList.remove("active");
+      });
+
+      /* =====================================================
+           CLICK OUTSIDE POPUP
+        ===================================================== */
+
+      popupOverlay.addEventListener("click", function (event) {
+        if (event.target === popupOverlay) {
+          popupOverlay.classList.remove("active");
+        }
+      });
+
+      /* =====================================================
+           ESC KEY
+        ===================================================== */
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          popupOverlay.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>
