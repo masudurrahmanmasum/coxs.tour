@@ -1492,3 +1492,174 @@ async function loadTotalRegistrations() {
 /* Page load হলে count আনবে */
 
 loadTotalRegistrations();
+
+
+
+// commeetee section script
+
+
+// =========================================================
+// TOUR COMMITTEE ANIMATION
+// =========================================================
+
+const committeeSection =
+    document.querySelector(".tour-committee-section");
+
+const committeeRevealElements =
+    document.querySelectorAll(
+        ".tour-committee-section .reveal-up"
+    );
+
+
+if (committeeRevealElements.length > 0) {
+
+    const committeeRevealObserver =
+        new IntersectionObserver(
+
+            function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (entry.isIntersecting) {
+
+                        const element =
+                            entry.target;
+
+
+                        const delay =
+                            element.dataset.delay || 0;
+
+
+                        element.style.setProperty(
+                            "--card-delay",
+                            delay + "ms"
+                        );
+
+
+                        element.classList.add(
+                            "visible"
+                        );
+
+
+                    } else {
+
+                        /*
+                         * আবার scroll করে উপরে/নিচে গেলে
+                         * animation আবার হবে
+                         */
+
+                        entry.target.classList.remove(
+                            "visible"
+                        );
+
+                    }
+
+                });
+
+            },
+
+            {
+                threshold: 0.15,
+
+                rootMargin:
+                    "0px 0px -50px 0px"
+            }
+
+        );
+
+
+    committeeRevealElements.forEach(
+        function (element) {
+
+            committeeRevealObserver.observe(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+// =========================================================
+// COMMITTEE CARD MOUSE GLOW
+// =========================================================
+
+const committeeGlowCards =
+    document.querySelectorAll(
+        ".committee-card"
+    );
+
+
+committeeGlowCards.forEach(
+    function (card) {
+
+        const glow =
+            card.querySelector(
+                ".committee-card-glow"
+            );
+
+
+        if (!glow) {
+            return;
+        }
+
+
+        card.addEventListener(
+            "mousemove",
+            function (event) {
+
+                if (window.innerWidth <= 600) {
+                    return;
+                }
+
+
+                const rect =
+                    card.getBoundingClientRect();
+
+
+                const x =
+                    event.clientX -
+                    rect.left;
+
+
+                const y =
+                    event.clientY -
+                    rect.top;
+
+
+                glow.style.left =
+                    x + "px";
+
+
+                glow.style.top =
+                    y + "px";
+
+
+                glow.style.transform =
+                    "translate(-50%, -50%)";
+
+            }
+        );
+
+
+        card.addEventListener(
+            "mouseleave",
+            function () {
+
+                glow.style.left =
+                    "50%";
+
+
+                glow.style.top =
+                    "-100px";
+
+
+                glow.style.transform =
+                    "translateX(-50%)";
+
+            }
+        );
+
+    }
+);

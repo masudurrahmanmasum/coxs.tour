@@ -3343,6 +3343,703 @@ img {
 
 
 
+/* =========================================================
+   TOUR COMMITTEE SECTION
+========================================================= */
+
+.tour-committee-section {
+
+    position: relative;
+
+    width: 100%;
+
+    padding: 100px 20px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(37, 211, 255, 0.08),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0, 255, 200, 0.06),
+            transparent 35%
+        );
+
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.committee-container {
+
+    width: 100%;
+
+    max-width: 1250px;
+
+    margin: auto;
+
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.committee-heading {
+
+    text-align: center;
+
+    max-width: 700px;
+
+    margin: 0 auto 55px;
+
+}
+
+
+.committee-subtitle {
+
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    padding: 7px 16px;
+
+    border: 1px solid rgba(114, 237, 255, 0.25);
+
+    border-radius: 30px;
+
+    background:
+        rgba(114, 237, 255, 0.06);
+
+    color: #72edff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+}
+
+
+.committee-heading h2 {
+
+    margin: 0;
+
+    font-size: clamp(32px, 5vw, 52px);
+
+    font-weight: 800;
+
+    line-height: 1.1;
+
+    color: #ffffff;
+
+}
+
+
+.committee-heading p {
+
+    margin-top: 16px;
+
+    color: rgba(255, 255, 255, 0.62);
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================================
+   CARD GRID
+========================================================= */
+
+.committee-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 24px;
+
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.committee-card {
+
+    position: relative;
+
+    min-height: 390px;
+
+    padding: 34px 24px 26px;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    border-radius: 24px;
+
+    border: 1px solid
+        rgba(114, 237, 255, 0.16);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(8, 55, 72, 0.96),
+            rgba(4, 29, 40, 0.98)
+        );
+
+    box-shadow:
+
+        0 20px 50px
+        rgba(0, 0, 0, 0.28),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.05);
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform 0.45s cubic-bezier(.2,.8,.2,1),
+        box-shadow 0.45s ease,
+        border-color 0.45s ease;
+
+    opacity: 0;
+
+    transform:
+        translateY(60px)
+        scale(0.96);
+
+}
+
+
+/* =========================================================
+   REVEAL UP
+========================================================= */
+
+.committee-card.visible {
+
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    transition-delay:
+        var(--card-delay, 0ms);
+
+}
+
+
+/* =========================================================
+   CARD HOVER
+========================================================= */
+
+.committee-card:hover {
+
+    transform:
+        translateY(-14px)
+        scale(1.025);
+
+    border-color:
+        rgba(114, 237, 255, 0.45);
+
+    box-shadow:
+
+        0 30px 70px
+        rgba(0, 0, 0, 0.40),
+
+        0 0 35px
+        rgba(114, 237, 255, 0.10);
+
+}
+
+
+/* =========================================================
+   CARD GLOW
+========================================================= */
+
+.committee-card-glow {
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 180px;
+
+    left: 50%;
+
+    top: -100px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        rgba(114, 237, 255, 0.18);
+
+    filter: blur(45px);
+
+    opacity: 0.7;
+
+    pointer-events: none;
+
+    transition:
+        left 0.15s ease,
+        top 0.15s ease;
+
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.committee-number {
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 20px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    color:
+        rgba(114, 237, 255, 0.35);
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.committee-profile {
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 10px;
+
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.committee-avatar {
+
+    position: relative;
+
+    width: 130px;
+
+    height: 130px;
+
+    padding: 5px;
+
+    border-radius: 50%;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            #72edff,
+            #20d6c7,
+            #72edff
+        );
+
+    box-shadow:
+
+        0 0 0 6px
+        rgba(114, 237, 255, 0.06),
+
+        0 0 30px
+        rgba(114, 237, 255, 0.16);
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+
+}
+
+
+.committee-card:hover
+.committee-avatar {
+
+    transform:
+        scale(1.08)
+        rotate(3deg);
+
+    box-shadow:
+
+        0 0 0 8px
+        rgba(114, 237, 255, 0.07),
+
+        0 0 45px
+        rgba(114, 237, 255, 0.25);
+
+}
+
+
+.committee-avatar img {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 3px solid
+        #083748;
+
+}
+
+
+/* =========================================================
+   MEMBER INFO
+========================================================= */
+
+.committee-info {
+
+    margin-top: 25px;
+
+}
+
+
+.committee-info h3 {
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+}
+
+
+.committee-info span {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color:
+        rgba(255, 255, 255, 0.52);
+
+    font-size: 12px;
+
+    letter-spacing: 0.4px;
+
+}
+
+
+/* =========================================================
+   ACTION ICONS
+========================================================= */
+
+.committee-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+}
+
+
+.committee-action {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 44px;
+
+    height: 44px;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.12);
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+
+}
+
+
+/* Call */
+
+.committee-action.call:hover {
+
+    transform:
+        translateY(-5px)
+        scale(1.08);
+
+    background:
+        rgba(52, 211, 153, 0.18);
+
+    box-shadow:
+        0 10px 25px
+        rgba(52, 211, 153, 0.20);
+
+}
+
+
+/* Email */
+
+.committee-action.email:hover {
+
+    transform:
+        translateY(-5px)
+        scale(1.08);
+
+    background:
+        rgba(114, 237, 255, 0.15);
+
+    box-shadow:
+        0 10px 25px
+        rgba(114, 237, 255, 0.20);
+
+}
+
+
+/* WhatsApp */
+
+.committee-action.whatsapp:hover {
+
+    transform:
+        translateY(-5px)
+        scale(1.08);
+
+    background:
+        rgba(37, 211, 102, 0.18);
+
+    box-shadow:
+        0 10px 25px
+        rgba(37, 211, 102, 0.20);
+
+}
+
+
+/* =========================================================
+   REVEAL UP HEADING
+========================================================= */
+
+.committee-heading.reveal-up {
+
+    opacity: 0;
+
+    transform:
+        translateY(50px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+
+}
+
+
+.committee-heading.reveal-up.visible {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .committee-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        max-width: 750px;
+
+        margin: auto;
+
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .tour-committee-section {
+
+        padding:
+            75px 16px;
+
+    }
+
+
+    .committee-heading {
+
+        margin-bottom: 40px;
+
+    }
+
+
+    .committee-heading h2 {
+
+        font-size: 34px;
+
+    }
+
+
+    .committee-heading p {
+
+        font-size: 14px;
+
+    }
+
+
+    .committee-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+        max-width: 420px;
+
+    }
+
+
+    .committee-card {
+
+        min-height: 365px;
+
+        padding:
+            30px 20px 24px;
+
+    }
+
+
+    .committee-card:hover {
+
+        transform:
+            translateY(-7px);
+
+    }
+
+
+    .committee-avatar {
+
+        width: 115px;
+
+        height: 115px;
+
+    }
+
+
+    .committee-info h3 {
+
+        font-size: 19px;
+
+    }
+
+
+    .committee-action {
+
+        width: 46px;
+
+        height: 46px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .committee-card,
+    .committee-heading,
+    .committee-avatar,
+    .committee-action {
+
+        transition: none !important;
+
+        animation: none !important;
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
