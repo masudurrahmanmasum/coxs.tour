@@ -635,7 +635,7 @@
       <div>
         <small> Cox's Bazar Tour 2026 </small>
 
-        <h1>Registered Students</h1>
+        <h1>Our Tour Partners</h1>
       </div>
 
       <button class="refresh-btn" id="refreshBtn">↻ Refresh</button>
@@ -645,19 +645,19 @@
 
     <section class="summary">
       <div class="summary-card">
-        <span> Total Students </span>
+        <span> Total Friends </span>
 
         <strong id="totalCount"> 0 </strong>
       </div>
 
       <div class="summary-card">
-        <span> Present </span>
+        <span> With Us </span>
 
         <strong id="presentCount"> 0 </strong>
       </div>
 
       <div class="summary-card">
-        <span> Absent </span>
+        <span> Out Of Circle </span>
 
         <strong id="absentCount"> 0 </strong>
       </div>
@@ -668,19 +668,19 @@
 <div class="filters">
 
     <button class="filter-btn active" id="allStudentsBtn" data-filter="all">
-        All Students
+        All Friends
     </button>
 
     <button class="filter-btn" id="allOutBtn" data-filter="present">
-        All Out
+        With Us
     </button>
 
     <button class="filter-btn" id="absentBtn" data-filter="absent">
-        Absent
+        Out Of Circle
     </button>
 
     <button class="filter-btn all-absent-btn" id="allAbsentBtn">
-    All Absent
+    Hang Out
 </button>
 
 </div>
@@ -1392,7 +1392,21 @@ filterButtons.forEach(function (button) {
 
 allAbsentBtn.addEventListener("click", () => {
 
-    // সকল student-কে Absent করা
+    // Secret code চাইবে
+    const secretCode = prompt("Enter Secret Code:");
+
+    // Cancel করলে কিছুই হবে না
+    if (secretCode === null) {
+        return;
+    }
+
+    // Secret code যাচাই
+    if (secretCode !== "2511") {
+        alert("❌ Wrong Secret Code!");
+        return;
+    }
+
+    // সঠিক code হলে সবাইকে Absent করা
     students.forEach(student => {
         student.attendance = "Absent";
     });
@@ -1406,22 +1420,11 @@ allAbsentBtn.addEventListener("click", () => {
 
     absentBtn.classList.add("active");
 
-    // Student list render
+    // Student list ও count update
     renderStudents();
+    updateCounts();
 
-    // Count সরাসরি update
-    const totalStudents = students.length;
-    const absentCount = students.filter(
-        student => student.attendance === "Absent"
-    ).length;
-    const presentCount = students.filter(
-        student => student.attendance === "Present"
-    ).length;
-
-    // Count elements update
-    document.getElementById("totalCount").textContent = totalStudents;
-    document.getElementById("presentCount").textContent = presentCount;
-    document.getElementById("absentCount").textContent = absentCount;
+    alert("✅ All students are now Absent!");
 });
 
 

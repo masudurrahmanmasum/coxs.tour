@@ -162,6 +162,171 @@ body {
 }
 
 
+
+
+
+
+
+/* tour partner  */
+
+/* =========================================
+   ALL TOUR PARTNERS BUTTON
+========================================= */
+
+.tour-partners-btn-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 18px;
+}
+
+.tour-partners-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    padding: 15px 28px;
+    min-width: 220px;
+
+    border: 1px solid rgba(76, 221, 229, 0.7);
+    border-radius: 50px;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+    overflow: hidden;
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease,
+        background 0.35s ease;
+
+    animation: partnerFloat 3s ease-in-out infinite;
+}
+
+/* Shine effect */
+.tour-partners-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.25),
+        transparent
+    );
+
+    transform: skewX(-25deg);
+    transition: left 0.7s ease;
+}
+
+/* Button hover */
+.tour-partners-btn:hover {
+    transform: translateY(-4px) scale(1.03);
+
+    border-color: #26d8e5;
+
+    background: rgba(38, 216, 229, 0.15);
+
+    box-shadow:
+        0 8px 25px rgba(38, 216, 229, 0.25),
+        0 0 20px rgba(38, 216, 229, 0.12);
+}
+
+.tour-partners-btn:hover::before {
+    left: 130%;
+}
+
+/* Arrow */
+.tour-partners-btn i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: #26d8e5;
+    color: #12313b;
+
+    font-size: 13px;
+
+    transition: transform 0.35s ease;
+}
+
+.tour-partners-btn:hover i {
+    transform: translateX(5px);
+}
+
+/* Soft floating animation */
+@keyframes partnerFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Click effect */
+.tour-partners-btn:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .tour-partners-btn {
+        min-width: 200px;
+        padding: 13px 22px;
+        font-size: 12px;
+    }
+
+    .tour-partners-btn i {
+        width: 27px;
+        height: 27px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Close Button */
 
 .tour-popup-close {

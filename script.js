@@ -1814,3 +1814,24 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 });
+
+
+
+
+
+
+
+
+// =========================================
+// ALL TOUR PARTNERS BUTTON
+// =========================================
+
+const tourPartnersBtn = document.getElementById("tourPartnersBtn");
+
+if (tourPartnersBtn) {
+    tourPartnersBtn.addEventListener("click", function () {
+
+        window.location.href = "registered.html";
+
+    });
+}
