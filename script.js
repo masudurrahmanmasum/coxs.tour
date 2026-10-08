@@ -1663,3 +1663,154 @@ committeeGlowCards.forEach(
 
     }
 );
+
+
+
+
+/* =====================================================
+   TOUR COUNTDOWN POPUP
+   Tour Date: 28 October 2026
+   ===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const popup = document.getElementById("tourPopup");
+
+    const closeBtn =
+        document.getElementById("closeTourPopup");
+
+    const cancelBtn =
+        document.getElementById("popupCancel");
+
+    const continueBtn =
+        document.getElementById("popupContinue");
+
+
+    /* ================================
+       TOUR DATE
+       ================================ */
+
+    const tourDate =
+        new Date("2026-10-28T00:00:00+06:00").getTime();
+
+
+    /* ================================
+       COUNTDOWN FUNCTION
+       ================================ */
+
+    function updateCountdown() {
+
+        const now = new Date().getTime();
+
+        const difference = tourDate - now;
+
+
+        /* Tour date reached */
+
+        if (difference <= 0) {
+
+            document.getElementById("remainingDays").textContent = "0";
+
+            document.getElementById("countDays").textContent = "00";
+            document.getElementById("countHours").textContent = "00";
+            document.getElementById("countMinutes").textContent = "00";
+            document.getElementById("countSeconds").textContent = "00";
+
+            return;
+
+        }
+
+
+        /* Calculate time */
+
+        const days = Math.floor(
+            difference / (1000 * 60 * 60 * 24)
+        );
+
+        const hours = Math.floor(
+            (difference / (1000 * 60 * 60)) % 24
+        );
+
+        const minutes = Math.floor(
+            (difference / (1000 * 60)) % 60
+        );
+
+        const seconds = Math.floor(
+            (difference / 1000) % 60
+        );
+
+
+        /* Main Days */
+
+        document.getElementById(
+            "remainingDays"
+        ).textContent = days + 1;
+
+
+        /* Countdown */
+
+        document.getElementById(
+            "countDays"
+        ).textContent =
+            String(days).padStart(2, "0");
+
+
+        document.getElementById(
+            "countHours"
+        ).textContent =
+            String(hours).padStart(2, "0");
+
+
+        document.getElementById(
+            "countMinutes"
+        ).textContent =
+            String(minutes).padStart(2, "0");
+
+
+        document.getElementById(
+            "countSeconds"
+        ).textContent =
+            String(seconds).padStart(2, "0");
+
+    }
+
+
+    /* প্রথমবার */
+
+    updateCountdown();
+
+
+    /* প্রতি ১ সেকেন্ডে Update */
+
+    setInterval(updateCountdown, 1000);
+
+
+    /* ================================
+       CLOSE POPUP
+       ================================ */
+
+    function closePopup() {
+
+        popup.classList.add("hidden");
+
+    }
+
+
+    closeBtn.addEventListener(
+        "click",
+        closePopup
+    );
+
+
+    cancelBtn.addEventListener(
+        "click",
+        closePopup
+    );
+
+
+    continueBtn.addEventListener(
+        "click",
+        closePopup
+    );
+
+});

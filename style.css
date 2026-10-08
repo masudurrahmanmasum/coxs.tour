@@ -67,6 +67,457 @@ body {
     background: #041927;
 }
 
+
+
+
+
+/* =====================================================
+   TOUR COUNTDOWN POPUP
+   ===================================================== */
+
+.tour-popup-overlay {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(3, 15, 25, 0.62);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    z-index: 999999;
+
+    padding: 20px;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+}
+
+
+/* Popup Close করলে */
+
+.tour-popup-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* Main Popup */
+
+.tour-popup {
+    position: relative;
+
+    width: min(440px, 100%);
+
+    padding: 38px 30px 30px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 38, 52, 0.97),
+            rgba(8, 25, 36, 0.97)
+        );
+
+    border: 1px solid rgba(77, 224, 255, 0.45);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.65),
+        0 0 40px rgba(0, 220, 255, 0.12);
+
+    color: white;
+
+    animation: popupShow 0.55s cubic-bezier(.17,.67,.3,1.25);
+}
+
+
+/* Popup Animation */
+
+@keyframes popupShow {
+
+    0% {
+        opacity: 0;
+        transform: scale(0.75) translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+}
+
+
+/* Close Button */
+
+.tour-popup-close {
+    position: absolute;
+
+    top: 12px;
+    right: 14px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    color: rgba(255, 255, 255, 0.75);
+
+    font-size: 25px;
+
+    line-height: 30px;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+
+.tour-popup-close:hover {
+
+    background: rgba(255, 255, 255, 0.18);
+
+    color: white;
+
+    transform: rotate(90deg);
+
+}
+
+
+/* Icon */
+
+.popup-icon {
+
+    font-size: 45px;
+
+    margin-bottom: 8px;
+
+    filter: drop-shadow(
+        0 0 12px rgba(0, 220, 255, 0.35)
+    );
+
+}
+
+
+/* Small Title */
+
+.popup-small-title {
+
+    margin: 0 0 10px;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: #68e8ff;
+
+}
+
+
+/* Heading */
+
+.tour-popup h2 {
+
+    margin: 0;
+
+    font-size: 27px;
+
+    font-weight: 600;
+
+}
+
+
+/* Big Days Number */
+
+.days-number {
+
+    margin-top: 5px;
+
+    font-size: 72px;
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    color: #ffd86b;
+
+    text-shadow:
+        0 0 20px rgba(255, 216, 107, 0.25);
+
+}
+
+
+/* Days Text */
+
+.days-text {
+
+    margin: 3px 0 15px;
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+}
+
+
+/* Date */
+
+.popup-date {
+
+    margin: 0 0 22px;
+
+    font-size: 14px;
+
+    color: rgba(255,255,255,0.65);
+
+}
+
+
+/* Countdown */
+
+.countdown-box {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 8px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.countdown-item {
+
+    padding: 12px 5px;
+
+    background: rgba(255,255,255,0.06);
+
+    border:
+
+        1px solid
+        rgba(255,255,255,0.10);
+
+    border-radius: 12px;
+
+}
+
+
+.countdown-item span {
+
+    display: block;
+
+    font-size: 23px;
+
+    font-weight: 700;
+
+    color: #6eeaff;
+
+}
+
+
+.countdown-item small {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    color: rgba(255,255,255,0.55);
+
+}
+
+
+/* Main Button */
+
+.popup-continue-btn {
+
+    width: 100%;
+
+    padding: 13px 20px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: linear-gradient(
+        135deg,
+        #19d3e6,
+        #00a9c7
+    );
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 205, 235, 0.22);
+
+    transition: 0.3s;
+}
+
+
+.popup-continue-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px
+        rgba(0, 205, 235, 0.35);
+
+}
+
+
+/* Cancel */
+
+.popup-cancel-btn {
+
+    margin-top: 12px;
+
+    border: none;
+
+    background: transparent;
+
+    color: rgba(255,255,255,0.5);
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+}
+
+
+.popup-cancel-btn:hover {
+
+    color: white;
+
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 500px) {
+
+    .tour-popup {
+
+        padding:
+            35px
+            20px
+            25px;
+
+        border-radius: 20px;
+
+    }
+
+
+    .tour-popup h2 {
+
+        font-size: 23px;
+
+    }
+
+
+    .days-number {
+
+        font-size: 60px;
+
+    }
+
+
+    .days-text {
+
+        font-size: 19px;
+
+    }
+
+
+    .countdown-item span {
+
+        font-size: 19px;
+
+    }
+
+
+    .countdown-item small {
+
+        font-size: 10px;
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 a {
     color: inherit;
 }
